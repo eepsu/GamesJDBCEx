@@ -10,8 +10,7 @@ public class GamesApplication {
 		GameService gameService = new GameService();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			gameService.addGame(new Game("The Hobbit"));
-	//		System.out.println(gameService.getAllGames());
+			System.out.println(gameService.getFirstCategory());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
