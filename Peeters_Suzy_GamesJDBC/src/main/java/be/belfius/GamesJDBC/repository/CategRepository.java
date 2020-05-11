@@ -15,7 +15,7 @@ public class CategRepository {
 		Category firstCat =  null;
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
             Statement stmnt = connection.createStatement();
-            ResultSet firstCateg = stmnt.executeQuery("Select category_name FROM category");
+            ResultSet firstCateg = stmnt.executeQuery("Select category_name FROM category WHERE id = 1");
             firstCateg.next();  //selectie van de row
             firstCat = new Category(0,firstCateg.getString("category_name")); // object maken van de row
          
