@@ -24,8 +24,18 @@ public class GameService {
 	}
 	public Borrower getFirstBorrower() {
 		return borrowerRepository.getFirstBorrower();
-}
+	}
+	public Game getGameByName(String inGameName) {
+		return gameRepository.getGameByName(inGameName);
+	}
+	
+	
+	
+	
+	
+	
 //		public void addGame(Game game) {
 //		gameRepository.addGame(game);
 //	}
+	
 }

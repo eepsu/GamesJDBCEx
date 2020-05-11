@@ -6,8 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import be.belfius.GamesJDBC.domain.Game;
 
@@ -33,15 +32,41 @@ public class GameRepository {
         	   fifthGame.setPlayDuration(foundGame.getString("play_duration"));
         	   fifthGame.setGameDifId(foundGame.getInt("difficulty_id"));
         	   fifthGame.setPrice(foundGame.getDouble("price"));
-        	   fifthGame.setGameImage(foundGame.getString("image"));
-              	   
+        	   fifthGame.setGameImage(foundGame.getString("image"));  	   
            }
-   
        } catch (SQLException e) {
           e.printStackTrace();
           System.out.println(e.getErrorCode());
        }
        return fifthGame;
+   }
+       public Game getGameByName(String inGameName) {
+    	   Game foundGame =  null;
+    	   String inUpperName = inGameName.toUpperCase();
+    	   try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
+               PreparedStatement stmnt = connection.prepareStatement("Select game_name, editor,age, price FROM games.game WHERE UPPER(game_name) LIKE ?");
+               stmnt.setString(1,"%" + inUpperName + "%");
+               ResultSet rsGameByName = stmnt.executeQuery();
+               if (rsGameByName.next()){
+            	 foundGame = new Game();
+            	 foundGame.setGameName(rsGameByName.getString("game_name"));
+           		 foundGame.setGameEditor(rsGameByName.getString("editor"));
+           		 foundGame.setGameAge(rsGameByName.getString("age"));
+           		 foundGame.setPrice(rsGameByName.getDouble("price"));
+           		 System.out.println("The game has been found : ");
+           		 System.out.println("Name : " + "\t" + foundGame.getGameName());
+           		 System.out.println("Editor : "  + foundGame.getGameEditor());
+           		 System.out.println("Age : " + "\t" + foundGame.getGameAge());
+           		 System.out.println("Price : "  + foundGame.getPrice());
+            		 
+           	   }else {
+           		   System.out.println("Game not found");
+           	   }
+           } catch (SQLException e) {
+              e.printStackTrace();
+              System.out.println(e.getErrorCode());
+           }
+          return foundGame;
    }
    
    

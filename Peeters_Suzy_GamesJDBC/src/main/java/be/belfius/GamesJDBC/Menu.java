@@ -25,8 +25,8 @@ package be.belfius.GamesJDBC;
 			System.out.println("2. Show the fifth game");
 			System.out.println("3. Show the first borrower");
 			System.out.println("4. Show a game of your choice");
-			System.out.println("5. Show all games");
-			System.out.println("6. Show a list of games with category");
+//			System.out.println("5. Show all games");
+//			System.out.println("6. Show a list of games with category");
 			String inChoice = scanner.next();
 			setMenuChoice(inChoice);
 			}
@@ -54,10 +54,11 @@ package be.belfius.GamesJDBC;
 					System.out.print("The first borrower is : ");
 					System.out.println(gameService.getFirstBorrower().getBorrowerName() + " from " + gameService.getFirstBorrower().getBorrowerCity());
 					break;
-//				case "4" :
-//					String inGameName = scanner.next();
-//					gameService.getGameByPartName(inGameName);
-//					break;
+				case "4" :
+					System.out.print("Give a part of the game name : ");
+					String inGameName = scanner.next();
+					gameService.getGameByName(inGameName);
+					break;
 //				case "5" :
 //					List<Game> sortedList = gameService.sortedGames();
 //					for (Game oneGame : sortedList) { 
