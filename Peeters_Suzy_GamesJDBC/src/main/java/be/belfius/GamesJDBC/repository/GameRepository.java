@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import be.belfius.GamesJDBC.domain.Category;
+import be.belfius.GamesJDBC.domain.Difficulty;
 import be.belfius.GamesJDBC.domain.Game;
 
 
@@ -105,8 +106,43 @@ public class GameRepository {
                  }
                 return gameCat;
       }
+          public Game getChosenGameDet(String inGameCatName) { 
+       	   Game chosenGame =  null;
+              try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
+            	  PreparedStatement stmnt = connection.prepareStatement(
+                  "Select game_name, category_name, difficulty_name FROM games.game"
+                  		+ "inner join category on game.category_ID = category.ID inner join difficulty on game.difficulty_ID = difficulty.ID"
+                  		+ " WHERE UPPER(game_name) LIKE ?");
+                  ResultSet foundGame = stmnt.executeQuery();
+                  if (foundGame.next()){
+                	  chosenGame = new Game();
+                	  Category chosenCat = new Category(foundGame.getString("category_name"));
+                	  Difficulty chosenDif = new Difficulty(foundGame.getString("difficulty_name"));
+                 	  chosenGame.setGameName(foundGame.getString("game_name"));
+                 	  chosenGame.setGameCat(chosenCat);
+                 	  chosenGame.setGameDif(chosenDif);
+                 	  
+                 	  
+ //               	  chosenGame.setGameId(foundGame.getInt("id"));
+//                	  chosenGame.setGameEditor(foundGame.getString("editor"));
+//                	  chosenGame.setGameAuthor(foundGame.getString("author"));
+//                	  chosenGame.setGameYearEdition(foundGame.getInt("year_edition"));
+//                	  chosenGame.setGameAge(foundGame.getString("age"));
+//                	  chosenGame.setMinPlayers(foundGame.getInt("min_players"));
+//                	  chosenGame.setMaxPlayers(foundGame.getInt("max_players"));
+//                	  chosenGame.setGameCatId(foundGame.getInt("category_id"));
+//                	  chosenGame.setPlayDuration(foundGame.getString("play_duration"));
+//                	  chosenGame.setGameDifId(foundGame.getInt("difficulty_id"));
+//                	  chosenGame.setPrice(foundGame.getDouble("price"));
+//                	  chosenGame.setGameImage(foundGame.getString("image"));  	   
+                  }
+              } catch (SQLException e) {
+                 e.printStackTrace();
+                 System.out.println(e.getErrorCode());
+              }
+              return chosenGame;
    
-   
+          }
    
    
    

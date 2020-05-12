@@ -18,6 +18,7 @@ public class Game{
 	private String gameImage;
 	
 	private Category gameCat;
+	private Difficulty gameDif;
 	
 	public Game(int gameId, String gameName, String gameEditor, String gameAuthor, int gameYearEdition, String gameAge,
 			int minPlayers, int maxPlayers, int gameCatId, String playDuration, int gameDifId, double price,
@@ -42,10 +43,16 @@ public class Game{
 	public Category getGameCat() {
 		return gameCat;
 	}
-
-
 	public void setGameCat(Category gameCat) {
 		this.gameCat = gameCat;
+	}
+	
+	public Difficulty getGameDif() {
+		return gameDif;
+	}
+
+	public void setGameDif(Difficulty gameDif) {
+		this.gameDif = gameDif;
 	}
 
 

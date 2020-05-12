@@ -40,6 +40,9 @@ public class GameService {
 	public List<Difficulty> getAllDiff() {
 		return difficultyRepository.getAllDiff();
 	}
+	public Game getChosenGameDet(String inGameCatName) {
+		return gameRepository.getChosenGameDet(inGameCatName);
+	}
 	
 	
 	

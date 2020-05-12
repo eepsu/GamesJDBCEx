@@ -12,6 +12,9 @@ public class Difficulty {
 	public Difficulty() {
 		// TODO Auto-generated constructor stub
 	}
+	public Difficulty(String string) {
+		// TODO Auto-generated constructor stub
+	}
 	public int getDifficultyId() {
 		return difficultyId;
 	}

@@ -72,6 +72,9 @@ package be.belfius.GamesJDBC;
 					for (Game oneGame : gameCat) {
 						System.out.println("Game name : " + oneGame.getGameName() + "\t" +  "Game Category : " + oneGame.getGameCat().getCatName() );
 					}
+					System.out.print("Give a part of the game name : ");
+					String inGameCatName = scanner.next();
+					gameService.getChosenGameDet(inGameCatName);
 					break;
 				case "7" :
 					break;
