@@ -112,7 +112,7 @@ public class GameRepository {
               try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
             	  PreparedStatement stmnt = connection.prepareStatement(
                   "Select game_name, category_name, difficulty_name FROM games.game"
-                  		+ " inner join category on game.category_ID = category.ID inner join difficulty on game.difficulty_ID = difficulty.ID"
+                  		+ " inner join games.category on game.category_ID = category.ID inner join games.difficulty on game.difficulty_ID = difficulty.ID"
                   		+ " WHERE UPPER(game_name) LIKE ?");
             	  stmnt.setString(1,"%" + inUpperName + "%");
                   ResultSet foundGame = stmnt.executeQuery();
@@ -151,6 +151,28 @@ public class GameRepository {
               return chosenGame;
    
           }
+          
+          public ArrayList<Game> getGamesByDiff(Integer inDiff) { 
+        	  	ArrayList <Game>gamesByDiff = new ArrayList();
+                 try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
+               	  PreparedStatement stmnt = connection.prepareStatement(
+                     "Select game_name, difficulty_name FROM games.game"
+                     		+ " inner join games.difficulty on game.difficulty_id = difficulty.id WHERE difficulty.id >= ? ");
+               	  	 stmnt.setInt(1,inDiff);
+                     ResultSet rsGamesByDiff = stmnt.executeQuery();
+                     while (rsGamesByDiff.next()){
+                    	Game foundGame = new Game();
+                    	foundGame.setGameName(rsGamesByDiff.getString("game_name"));
+                        System.out.println(foundGame.getGameName() + " ");
+                     
+                     }
+                 } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println(e.getErrorCode());
+                 }
+                 return gamesByDiff;
+      
+             }
    
    
    

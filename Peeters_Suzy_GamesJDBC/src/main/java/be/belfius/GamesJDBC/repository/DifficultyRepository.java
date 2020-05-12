@@ -14,10 +14,11 @@ public class DifficultyRepository {
 	public ArrayList<Difficulty> getAllDiff() {
         ArrayList <Difficulty>allDiff = new ArrayList();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
-            PreparedStatement stmnt = connection.prepareStatement("Select difficulty_name FROM games.difficulty ");
+            PreparedStatement stmnt = connection.prepareStatement("Select id, difficulty_name FROM games.difficulty ");
             ResultSet rsAllDiff = stmnt.executeQuery();
             while (rsAllDiff.next()){
           	  Difficulty oneDiff = new Difficulty();
+          	  oneDiff.setDifficultyId(rsAllDiff.getInt("id"));
           	  oneDiff.setDifficultyName(rsAllDiff.getString("difficulty_name"));
           	  allDiff.add(oneDiff);
             }

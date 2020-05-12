@@ -43,6 +43,11 @@ public class GameService {
 	public Game getChosenGameDet(String inGameCatName) {
 		return gameRepository.getChosenGameDet(inGameCatName);
 	}
+	public List<Game> getGamesByDiff(Integer inDiff) {
+		return gameRepository.getGamesByDiff(inDiff);
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

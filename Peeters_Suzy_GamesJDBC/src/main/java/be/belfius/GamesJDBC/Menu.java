@@ -5,7 +5,8 @@ package be.belfius.GamesJDBC;
 	import java.util.Scanner;
 
 	import be.belfius.GamesJDBC.domain.Category;
-	import be.belfius.GamesJDBC.domain.Game;
+import be.belfius.GamesJDBC.domain.Difficulty;
+import be.belfius.GamesJDBC.domain.Game;
 	import be.belfius.GamesJDBC.repository.CategRepository;
 	import be.belfius.GamesJDBC.services.GameService;
 
@@ -39,6 +40,7 @@ package be.belfius.GamesJDBC;
 
 		public void menuOptions() {
 			do {
+				System.out.println();
 				showMenu(menuChoice);
 				
 				switch(menuChoice) {
@@ -78,8 +80,14 @@ package be.belfius.GamesJDBC;
 					break;
 				case "7" :
 					break;
-				case "8" :
-	//				List<Difficulty>getAllDiff
+				case "8" :		
+					List<Difficulty>getAllDiff = gameService.getAllDiff();
+					for (Difficulty oneDif : getAllDiff) {
+						System.out.println(oneDif.getDifficultyId() + "  " + oneDif.getDifficultyName() );
+						}
+					System.out.println("Choose the minimum level by entering the number : ");
+					Integer inDiff = scanner.nextInt();
+					gameService.getGamesByDiff(inDiff);
 					break;
 				default :
 					System.out.println("Wrong choice");
