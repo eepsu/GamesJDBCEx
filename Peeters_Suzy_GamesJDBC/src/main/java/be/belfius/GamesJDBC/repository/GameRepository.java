@@ -91,7 +91,7 @@ public class GameRepository {
           public ArrayList<Game> getGameCat() {
         	  ArrayList <Game>gameCat = new ArrayList();
               	   try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
-                     PreparedStatement stmnt = connection.prepareStatement("Select game_name, category_name FROM game inner join category on game.ID = category.ID");
+                     PreparedStatement stmnt = connection.prepareStatement("Select game_name, category_name FROM game inner join category on game.category_ID = category.ID");
                      ResultSet rsGameCat = stmnt.executeQuery();
                      while (rsGameCat.next()){
                     	Game foundGame = new Game();
@@ -108,19 +108,27 @@ public class GameRepository {
       }
           public Game getChosenGameDet(String inGameCatName) { 
        	   Game chosenGame =  null;
+       	   String inUpperName = inGameCatName.toUpperCase();
               try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
             	  PreparedStatement stmnt = connection.prepareStatement(
                   "Select game_name, category_name, difficulty_name FROM games.game"
-                  		+ "inner join category on game.category_ID = category.ID inner join difficulty on game.difficulty_ID = difficulty.ID"
+                  		+ " inner join category on game.category_ID = category.ID inner join difficulty on game.difficulty_ID = difficulty.ID"
                   		+ " WHERE UPPER(game_name) LIKE ?");
+            	  stmnt.setString(1,"%" + inUpperName + "%");
                   ResultSet foundGame = stmnt.executeQuery();
                   if (foundGame.next()){
                 	  chosenGame = new Game();
                 	  Category chosenCat = new Category(foundGame.getString("category_name"));
                 	  Difficulty chosenDif = new Difficulty(foundGame.getString("difficulty_name"));
                  	  chosenGame.setGameName(foundGame.getString("game_name"));
-                 	  chosenGame.setGameCat(chosenCat);
-                 	  chosenGame.setGameDif(chosenDif);
+   //              	  chosenGame.setGameCat(chosenCat);
+   //              	  chosenGame.setGameDif(chosenDif);
+                 	  System.out.println("The info of the game : ");
+               		  System.out.println("Name : " + "\t" + chosenGame.getGameName());
+               		  System.out.println("Category : " + "\t"  + chosenCat.getCatName());
+               		  System.out.println("Difficulty : " + "\t" + chosenDif.getDifficultyName());
+                  }else {
+              		   System.out.println("Game not found");
                  	  
                  	  
  //               	  chosenGame.setGameId(foundGame.getInt("id"));
