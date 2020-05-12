@@ -17,6 +17,8 @@ public class Game{
 	private double price;
 	private String gameImage;
 	
+	private Category gameCat;
+	
 	public Game(int gameId, String gameName, String gameEditor, String gameAuthor, int gameYearEdition, String gameAge,
 			int minPlayers, int maxPlayers, int gameCatId, String playDuration, int gameDifId, double price,
 			String gameImage) {
@@ -37,6 +39,16 @@ public class Game{
 	}
 	
 	
+	public Category getGameCat() {
+		return gameCat;
+	}
+
+
+	public void setGameCat(Category gameCat) {
+		this.gameCat = gameCat;
+	}
+
+
 	public Game() {	
 		
 	}

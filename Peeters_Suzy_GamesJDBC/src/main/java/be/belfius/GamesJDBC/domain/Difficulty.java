@@ -9,6 +9,9 @@ public class Difficulty {
 		this.difficultyId = difficultyId;
 		this.difficultyName = difficultyName;
 	}
+	public Difficulty() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getDifficultyId() {
 		return difficultyId;
 	}

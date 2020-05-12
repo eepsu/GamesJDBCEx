@@ -10,6 +10,13 @@ public class Category {
 		this.catName = catName;
 	}
 
+	
+	public Category(String catName) {
+		this.catName = catName;
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public int getCatId() {
 		return catId;
 	}

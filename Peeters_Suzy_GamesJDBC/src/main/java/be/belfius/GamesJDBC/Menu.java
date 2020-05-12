@@ -25,8 +25,10 @@ package be.belfius.GamesJDBC;
 			System.out.println("2. Show the fifth game");
 			System.out.println("3. Show the first borrower");
 			System.out.println("4. Show a game of your choice");
-//			System.out.println("5. Show all games");
-//			System.out.println("6. Show a list of games with category");
+			System.out.println("5. Show all games");
+			System.out.println("6. Show a list of games and choose a game");
+			System.out.println("7. Show borrowed games");
+			System.out.println("8. Advanced search : difficulty");
 			String inChoice = scanner.next();
 			setMenuChoice(inChoice);
 			}
@@ -59,23 +61,23 @@ package be.belfius.GamesJDBC;
 					String inGameName = scanner.next();
 					gameService.getGameByName(inGameName);
 					break;
-//				case "5" :
-//					List<Game> sortedList = gameService.sortedGames();
-//					for (Game oneGame : sortedList) { 
-//						System.out.println(oneGame.getGameName() + "\t" + oneGame.getGameEditor() + "\t" + oneGame.getPrice());
-//					}
-//					break;
-//				case "6" :
-//					List<Game> allGames = gameService.getAllGames();
-//					List<Category> allCats = gameService.getAllCategories();
-//					for (Game oneGame : allGames) { 
-//						for (Category foundCat : allCats) {
-//							if (oneGame.getGameCatId()==(foundCat.getCatId())){
-//								System.out.println("GAME : " + oneGame.getGameName()+ "\t" + "TYPE : " + foundCat.getCatName());
-//							}
-//						}
-//					}
-//					break;
+				case "5" :
+					List<Game> sortedList = gameService.sortedGames();
+					for (Game oneGame : sortedList) { 
+						System.out.println(oneGame.getGameName() + "\t" + oneGame.getGameEditor() + "\t" + oneGame.getPrice());
+					}
+					break;
+				case "6" :
+					List<Game>gameCat = gameService.getGameCat();
+					for (Game oneGame : gameCat) {
+						System.out.println("Game name : " + oneGame.getGameName() + "\t" +  "Game Category : " + oneGame.getGameCat().getCatName() );
+					}
+					break;
+				case "7" :
+					break;
+				case "8" :
+	//				List<Difficulty>getAllDiff
+					break;
 				default :
 					System.out.println("Wrong choice");
 				}

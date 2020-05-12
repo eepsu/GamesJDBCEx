@@ -6,8 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
-
+import be.belfius.GamesJDBC.domain.Category;
 import be.belfius.GamesJDBC.domain.Game;
 
 
@@ -67,7 +68,43 @@ public class GameRepository {
               System.out.println(e.getErrorCode());
            }
           return foundGame;
+       }
+          public ArrayList<Game> getSortedGames() {
+           ArrayList <Game>sortedGames = new ArrayList();
+       	   try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
+                  PreparedStatement stmnt = connection.prepareStatement("Select game_name, editor, price FROM games.game ORDER BY(game_name)");
+                  ResultSet rsSortedGames = stmnt.executeQuery();
+                  while (rsSortedGames.next()){
+                	  Game sortGame = new Game();
+                	  sortGame.setGameName(rsSortedGames.getString("game_name"));
+                	  sortGame.setGameEditor(rsSortedGames.getString("editor"));
+                	  sortGame.setPrice(rsSortedGames.getDouble("price"));
+                	  sortedGames.add(sortGame);
+                  }
+              } catch (SQLException e) {
+                 e.printStackTrace();
+                 System.out.println(e.getErrorCode());
+              }
+             return sortedGames;
    }
+          public ArrayList<Game> getGameCat() {
+        	  ArrayList <Game>gameCat = new ArrayList();
+              	   try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
+                     PreparedStatement stmnt = connection.prepareStatement("Select game_name, category_name FROM game inner join category on game.ID = category.ID");
+                     ResultSet rsGameCat = stmnt.executeQuery();
+                     while (rsGameCat.next()){
+                    	Game foundGame = new Game();
+                    	Category foundCat = new Category(rsGameCat.getString("category_name"));
+                   	  	foundGame.setGameName(rsGameCat.getString("game_name"));
+                   	  	foundGame.setGameCat(foundCat);
+                   	  	gameCat.add(foundGame);
+                     }
+                 } catch (SQLException e) {
+                    e.printStackTrace();
+                    System.out.println(e.getErrorCode());
+                 }
+                return gameCat;
+      }
    
    
    
