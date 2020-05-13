@@ -185,7 +185,7 @@ public class GameRepository {
                     	foundGame.setGameName(rsBorrowedGames.getString("game_name"));
                     	Borrow foundBorrow = new Borrow();
                     	foundBorrow.setBorrowDate(rsBorrowedGames.getTimestamp("borrow_date").toLocalDateTime().toLocalDate());
-                    	if	(!rsBorrowedGames.getTimestamp("return_date").equals(null)){
+                    	if	(!(rsBorrowedGames.getTimestamp("return_date")== null)){
                     		foundBorrow.setReturnDate(rsBorrowedGames.getTimestamp("return_date").toLocalDateTime().toLocalDate());
                     	}
                     	Borrower foundBorrower = new Borrower();
