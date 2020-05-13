@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import be.belfius.GamesJDBC.domain.Borrow;
+import be.belfius.GamesJDBC.domain.Borrower;
 import be.belfius.GamesJDBC.domain.Category;
 import be.belfius.GamesJDBC.domain.Difficulty;
 import be.belfius.GamesJDBC.domain.Game;
@@ -71,8 +73,8 @@ public class GameRepository {
           return foundGame;
        }
           public ArrayList<Game> getSortedGames() {
-           ArrayList <Game>sortedGames = new ArrayList();
-       	   try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
+        	  ArrayList <Game>sortedGames = new ArrayList();
+       	   	  try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
                   PreparedStatement stmnt = connection.prepareStatement("Select game_name, editor, price FROM games.game ORDER BY(game_name)");
                   ResultSet rsSortedGames = stmnt.executeQuery();
                   while (rsSortedGames.next()){
@@ -121,8 +123,6 @@ public class GameRepository {
                 	  Category chosenCat = new Category(foundGame.getString("category_name"));
                 	  Difficulty chosenDif = new Difficulty(foundGame.getString("difficulty_name"));
                  	  chosenGame.setGameName(foundGame.getString("game_name"));
-   //              	  chosenGame.setGameCat(chosenCat);
-   //              	  chosenGame.setGameDif(chosenDif);
                  	  System.out.println("The info of the game : ");
                		  System.out.println("Name : " + "\t" + chosenGame.getGameName());
                		  System.out.println("Category : " + "\t"  + chosenCat.getCatName());
@@ -130,8 +130,7 @@ public class GameRepository {
                   }else {
               		   System.out.println("Game not found");
                  	  
-                 	  
- //               	  chosenGame.setGameId(foundGame.getInt("id"));
+//               	  chosenGame.setGameId(foundGame.getInt("id"));
 //                	  chosenGame.setGameEditor(foundGame.getString("editor"));
 //                	  chosenGame.setGameAuthor(foundGame.getString("author"));
 //                	  chosenGame.setGameYearEdition(foundGame.getInt("year_edition"));
@@ -153,9 +152,9 @@ public class GameRepository {
           }
           
           public ArrayList<Game> getGamesByDiff(Integer inDiff) { 
-        	  	ArrayList <Game>gamesByDiff = new ArrayList();
+        	  	 ArrayList <Game>gamesByDiff = new ArrayList();
                  try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
-               	  PreparedStatement stmnt = connection.prepareStatement(
+               	  	 PreparedStatement stmnt = connection.prepareStatement(
                      "Select game_name, difficulty_name FROM games.game"
                      		+ " inner join games.difficulty on game.difficulty_id = difficulty.id WHERE difficulty.id >= ? ");
                	  	 stmnt.setInt(1,inDiff);
@@ -173,6 +172,35 @@ public class GameRepository {
                  return gamesByDiff;
       
              }
+          public ArrayList<Game> getBorrowedGames(){
+          		ArrayList <Game> borrowedGames = new ArrayList();
+          		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
+              	  	 PreparedStatement stmnt = connection.prepareStatement(
+                    "Select  borrow_date, borrower_name, return_date, game_name FROM games.borrow "  
+                    	+	"inner join games.borrower on borrower.id = borrow.borrower_id "
+                        +   "inner join games.game on borrow.game_id = game.id ORDER BY borrower.borrower_name, borrow.borrow_date ");
+                    ResultSet rsBorrowedGames = stmnt.executeQuery();
+                    while (rsBorrowedGames.next()){
+                    	Game foundGame = new Game();
+                    	foundGame.setGameName(rsBorrowedGames.getString("game_name"));
+                    	Borrow foundBorrow = new Borrow();
+                    	foundBorrow.setBorrowDate(rsBorrowedGames.getTimestamp("borrow_date").toLocalDateTime().toLocalDate());
+                    	if	(!rsBorrowedGames.getTimestamp("return_date").equals(null)){
+                    		foundBorrow.setReturnDate(rsBorrowedGames.getTimestamp("return_date").toLocalDateTime().toLocalDate());
+                    	}
+                    	Borrower foundBorrower = new Borrower();
+                    	foundBorrower.setBorrowerName(rsBorrowedGames.getString("borrower_name"));
+                    	foundGame.setGameBorrow(foundBorrow);
+                    	foundGame.setGameBorrower(foundBorrower);
+                    	borrowedGames.add(foundGame);          
+                    }
+                } catch (SQLException e) {
+                   e.printStackTrace();
+                   System.out.println(e.getErrorCode());
+                }
+                return borrowedGames;
+          		}
+          	
    
    
    

@@ -83,6 +83,15 @@ import be.belfius.GamesJDBC.domain.Game;
 					gameService.getChosenGameDet(inGameCatName);
 					break;
 				case "7" :
+					List <Game> borrowedGames = gameService.getBorrowedGames();
+					if (borrowedGames.size() == 0) {
+						System.out.println("No matches");
+					}else {
+						System.out.printf("%-30s %-40s %-20s %-20s\n","Borrowername","Gamename","Borrow date","Return date" );
+						System.out.printf("%-30s %-40s %-20s %-20s\n","------------","--------","-----------","-----------" );
+						for (Game oneGame : borrowedGames)
+							System.out.printf("%-30s %-40s %-20s %-20s\n",oneGame.getGameBorrower().getBorrowerName(),oneGame.getGameName(),oneGame.getGameBorrow().getBorrowDate(),oneGame.getGameBorrow().getReturnDate());
+					}
 					break;
 				case "8" :		
 					List<Difficulty>getAllDiff = gameService.getAllDiff();

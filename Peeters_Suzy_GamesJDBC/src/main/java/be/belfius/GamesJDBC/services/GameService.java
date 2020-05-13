@@ -53,6 +53,11 @@ public class GameService {
 		// TODO Auto-generated method stub
 		
 	}
+	public List<Game> getBorrowedGames() {
+		return gameRepository.getBorrowedGames();
+		// TODO Auto-generated method stub
+
+	}
 	
 	
 	
