@@ -89,7 +89,7 @@ public class GameRepository {
              return sortedGames;
    }
           public ArrayList<Game> getGameCat() {
-        	  ArrayList <Game>gameCat = new ArrayList();
+        	  	   ArrayList <Game>gameCat = new ArrayList();
               	   try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/games", "root", "");) {
                      PreparedStatement stmnt = connection.prepareStatement("Select game_name, category_name FROM game inner join category on game.category_ID = category.ID");
                      ResultSet rsGameCat = stmnt.executeQuery();

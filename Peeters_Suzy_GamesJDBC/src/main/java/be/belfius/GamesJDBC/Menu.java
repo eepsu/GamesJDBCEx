@@ -4,7 +4,10 @@ package be.belfius.GamesJDBC;
 	import java.util.List;
 	import java.util.Scanner;
 
-	import be.belfius.GamesJDBC.domain.Category;
+import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help.TextTable;
+
+import be.belfius.GamesJDBC.domain.Borrower;
+import be.belfius.GamesJDBC.domain.Category;
 import be.belfius.GamesJDBC.domain.Difficulty;
 import be.belfius.GamesJDBC.domain.Game;
 	import be.belfius.GamesJDBC.repository.CategRepository;
@@ -30,6 +33,7 @@ import be.belfius.GamesJDBC.domain.Game;
 			System.out.println("6. Show a list of games and choose a game");
 			System.out.println("7. Show borrowed games");
 			System.out.println("8. Advanced search : difficulty");
+			System.out.println("9. Complex search borrowers");
 			String inChoice = scanner.next();
 			setMenuChoice(inChoice);
 			}
@@ -89,6 +93,22 @@ import be.belfius.GamesJDBC.domain.Game;
 					Integer inDiff = scanner.nextInt();
 					gameService.getGamesByDiff(inDiff);
 					break;
+				case "9" :
+					System.out.print("Give a part of the borrower name : ");
+					String inBorrowerName = scanner.next();
+					gameService.getBorrowerByName(inBorrowerName);
+					List<Borrower>foundBorrowers = gameService.getBorrowerByName(inBorrowerName);
+					if (foundBorrowers.size() == 0) {
+						System.out.println("No borrowers found with that name");
+					}else {
+						System.out.printf("%-15s %-15s %-15s %-15s\n","Name","City","Telephone","Mail" );
+						System.out.printf("%-15s %-15s %-15s %-15s\n","----","----","---------","----" );
+						for (Borrower oneBorrower : foundBorrowers) {
+							System.out.printf("%-15s %-15s %-15s %-15s\n",oneBorrower.getBorrowerName(),oneBorrower.getBorrowerCity(),oneBorrower.getBorrowerTel(),oneBorrower.getBorrowerMail());
+						}
+					}
+					break;
+					
 				default :
 					System.out.println("Wrong choice");
 				}

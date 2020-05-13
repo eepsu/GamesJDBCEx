@@ -48,6 +48,11 @@ public class GameService {
 		// TODO Auto-generated method stub
 		
 	}
+	public List<Borrower> getBorrowerByName(String inBorrowerName) {
+		return borrowerRepository.getBorrowerByName(inBorrowerName);
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	
