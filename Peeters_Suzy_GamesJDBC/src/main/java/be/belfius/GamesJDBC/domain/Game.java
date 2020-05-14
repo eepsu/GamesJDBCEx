@@ -17,6 +17,30 @@ public class Game{
 	private double price;
 	private String gameImage;
 	
+	public Borrower getGameBorrower() {
+		return gameBorrower;
+	}
+
+
+	public void setGameBorrower(Borrower gameBorrower) {
+		this.gameBorrower = gameBorrower;
+	}
+
+
+	public Borrow getGameBorrow() {
+		return gameBorrow;
+	}
+
+
+	public void setGameBorrow(Borrow gameBorrow) {
+		this.gameBorrow = gameBorrow;
+	}
+
+	private Category gameCat;
+	private Difficulty gameDif;
+	private Borrower gameBorrower;
+	private Borrow gameBorrow;
+	
 	public Game(int gameId, String gameName, String gameEditor, String gameAuthor, int gameYearEdition, String gameAge,
 			int minPlayers, int maxPlayers, int gameCatId, String playDuration, int gameDifId, double price,
 			String gameImage) {
@@ -37,6 +61,22 @@ public class Game{
 	}
 	
 	
+	public Category getGameCat() {
+		return gameCat;
+	}
+	public void setGameCat(Category gameCat) {
+		this.gameCat = gameCat;
+	}
+	
+	public Difficulty getGameDif() {
+		return gameDif;
+	}
+
+	public void setGameDif(Difficulty gameDif) {
+		this.gameDif = gameDif;
+	}
+
+
 	public Game() {	
 		
 	}

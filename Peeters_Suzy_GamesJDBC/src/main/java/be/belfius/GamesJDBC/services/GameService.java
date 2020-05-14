@@ -4,16 +4,19 @@ import java.util.List;
 
 import be.belfius.GamesJDBC.domain.Borrower;
 import be.belfius.GamesJDBC.domain.Category;
+import be.belfius.GamesJDBC.domain.Difficulty;
 import be.belfius.GamesJDBC.domain.Game;
 import be.belfius.GamesJDBC.repository.GameRepository;
 import be.belfius.GamesJDBC.repository.BorrowerRepository;
 import be.belfius.GamesJDBC.repository.CategRepository;
+import be.belfius.GamesJDBC.repository.DifficultyRepository;
 
 
 public class GameService {
 	private GameRepository gameRepository = new GameRepository();
 	private CategRepository categRepository = new CategRepository();
 	private BorrowerRepository borrowerRepository = new BorrowerRepository();
+	private DifficultyRepository difficultyRepository = new DifficultyRepository();
 	
 
 	public Category getFirstCategory()  {
@@ -27,6 +30,33 @@ public class GameService {
 	}
 	public Game getGameByName(String inGameName) {
 		return gameRepository.getGameByName(inGameName);
+	}
+	public List<Game> sortedGames() {
+		return gameRepository.getSortedGames();
+	}
+	public List<Game> getGameCat() {
+		return gameRepository.getGameCat();
+	}
+	public List<Difficulty> getAllDiff() {
+		return difficultyRepository.getAllDiff();
+	}
+	public Game getChosenGameDet(String inGameCatName) {
+		return gameRepository.getChosenGameDet(inGameCatName);
+	}
+	public List<Game> getGamesByDiff(Integer inDiff) {
+		return gameRepository.getGamesByDiff(inDiff);
+		// TODO Auto-generated method stub
+		
+	}
+	public List<Borrower> getBorrowerByName(String inBorrowerName) {
+		return borrowerRepository.getBorrowerByName(inBorrowerName);
+		// TODO Auto-generated method stub
+		
+	}
+	public List<Game> getBorrowedGames() {
+		return gameRepository.getBorrowedGames();
+		// TODO Auto-generated method stub
+
 	}
 	
 	
