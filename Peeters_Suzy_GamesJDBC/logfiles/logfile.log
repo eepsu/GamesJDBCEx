@@ -1,0 +1,15 @@
+13:31:03.451 [main] INFO  b.belfius.GamesJDBC.GamesApplication - We gaan eens testen
+13:31:03.459 [main] ERROR b.belfius.GamesJDBC.GamesApplication - An error occured while dividing 10 by 0
+java.lang.ArithmeticException: error message
+	at be.belfius.GamesJDBC.GamesApplication.logMessage(GamesApplication.java:27)
+	at be.belfius.GamesJDBC.GamesApplication.main(GamesApplication.java:20)
+13:31:03.461 [main] ERROR b.belfius.GamesJDBC.GamesApplication - this is an error message
+13:31:03.462 [main] WARN  b.belfius.GamesJDBC.GamesApplication - this is a log message from the main method
+13:54:23.342 [main] INFO  b.belfius.GamesJDBC.GamesApplication - log info
+13:54:23.348 [main] ERROR b.belfius.GamesJDBC.GamesApplication - An error occured while dividing 10 by 0
+java.lang.ArithmeticException: error message
+	at be.belfius.GamesJDBC.GamesApplication.logMessage(GamesApplication.java:27)
+	at be.belfius.GamesJDBC.GamesApplication.main(GamesApplication.java:20)
+13:54:23.350 [main] ERROR b.belfius.GamesJDBC.GamesApplication - this is an error message
+13:54:23.350 [main] WARN  b.belfius.GamesJDBC.GamesApplication - log info
+13:55:26.316 [main] INFO  b.belfius.GamesJDBC.GamesApplication - log info

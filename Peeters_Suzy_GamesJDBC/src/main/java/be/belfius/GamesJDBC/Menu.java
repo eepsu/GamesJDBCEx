@@ -4,7 +4,7 @@ package be.belfius.GamesJDBC;
 	import java.util.List;
 	import java.util.Scanner;
 
-import org.apache.logging.log4j.core.tools.picocli.CommandLine.Help.TextTable;
+
 
 import be.belfius.GamesJDBC.domain.Borrower;
 import be.belfius.GamesJDBC.domain.Category;
