@@ -13,3 +13,4 @@ java.lang.ArithmeticException: error message
 13:54:23.350 [main] ERROR b.belfius.GamesJDBC.GamesApplication - this is an error message
 13:54:23.350 [main] WARN  b.belfius.GamesJDBC.GamesApplication - log info
 13:55:26.316 [main] INFO  b.belfius.GamesJDBC.GamesApplication - log info
+17:09:35.365 [main] INFO  b.belfius.GamesJDBC.GamesApplication - log info
